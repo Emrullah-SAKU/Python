@@ -1,0 +1,21 @@
+#   - Speech Recognition in Python
+# -*- coding: cp1254 -*-
+import pyaudio
+import wave
+import speech_recognition as sr
+"""
+RECORD_SECONDS = 3
+CHUNK = 1024
+RATE = 44100"""
+
+r = sr.Recognizer()
+with sr.Microphone() as source:                # use the default microphone as the audio source
+    print "Give Order please: "
+    audio = r.listen(source,timeout = 3)       #timeout is time of recording # listen for the first phrase and extract it into audio data
+
+try:
+    print("You said " + r.recognize(audio))    # recognize speech using Google Speech Recognition
+    if r.recognize(audio) == 'any port in the storm':
+        print 'There can be always a port'
+except LookupError:                            # speech is unintelligible
+    print("Could not understand audio")
